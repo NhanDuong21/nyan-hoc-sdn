@@ -7,10 +7,10 @@ app.use(express.urlencoded({ extended: true }));
 
 const users = [
     {
-        id: 1, name: `Name1`
+        id: 1, name: `Nyan`
     },
     {
-        id: 2, name: `Name2`
+        id: 2, name: `Dương Thiện Nhân`
     }
 ];
 
@@ -23,6 +23,14 @@ app.get(`/users/:id`, (req, res) => {
     } else {
         res.status(400).send(`User not found!`)
     }
+});
+
+app.post(`/users`, (req, res) => {
+    const newUser = {
+        id: req.body.id,
+        name: req.body.name
+    };
+    res.status(201).json(newUser);
 });
 
 app.get(`/hello`, (req, res) => {
