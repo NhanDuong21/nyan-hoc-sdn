@@ -46,7 +46,7 @@ app.put(`/users/:id`, (req, res) => {
 
 app.delete(`/users/:id`, (req, res) => {
     const { id } = req.params;
-    const user = users.find((u) => u.id === parseInt(id));
+    const user = users.findIndex((u) => u.id === parseInt(id));
     if (user !== -1) {
         users.splice(user, 1);
         res.send(`User deleted`);
