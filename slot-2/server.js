@@ -33,6 +33,17 @@ app.post(`/users`, (req, res) => {
     res.status(201).json(newUser);
 });
 
+app.put(`/users/:id`, (req, res) => {
+    const { id } = req.params;
+    const user = users.find((u) => u.id === parseInt(id));
+    if (user) {
+        user.name = req.body.name;
+        res.json(user);
+    } else {
+        res.status(404).send(`User not found!`);
+    }
+})
+
 app.get(`/hello`, (req, res) => {
     res.json(`Hello World!`);
 });
