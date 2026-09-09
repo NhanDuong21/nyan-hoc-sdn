@@ -15,6 +15,15 @@ const users = [
 ];
 
 app.get(`/users`, (req, res) => { res.status(200).json(users); })
+app.get(`/users/:id`, (req, res) => {
+    const { id } = req.params;
+    const user = users.find((u) => u.id === parseInt(id));
+    if (user) {
+        res.status(200).json(user)
+    } else {
+        res.status(400).send(`User not found!`)
+    }
+});
 
 app.get(`/hello`, (req, res) => {
     res.json(`Hello World!`);
