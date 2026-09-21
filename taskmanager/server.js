@@ -1,6 +1,8 @@
 const express = require('express');
 const tasksRoutes = require('./src/routes/taskRoutes');
-
+const connectDB = require('./src/config/db')
+// Connect to the Database
+connectDB();
 const app = express();
 
 app.use(express.json());
