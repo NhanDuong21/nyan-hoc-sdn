@@ -8,11 +8,11 @@ const bookSchema = new mongoose.Schema({
 
     status: {
         type: String,
-        enum: ['available', 'borrowed '],
+        enum: ['available', 'borrowed'],
         default: 'available'
     },
 
-    brrowedAt: {
+    borrowedAt: {
         type: Date,
         default: null
     }

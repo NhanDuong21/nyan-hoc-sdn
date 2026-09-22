@@ -24,7 +24,7 @@ exports.createBook = async (req, res) => {
 
 exports.updateBook = async (req, res) => {
     try {
-        const { title, status, borrowedAt  } = req.body;
+        const { title, status, borrowedAt } = req.body;
 
         const updateBook = await Book.findByIdAndUpdate(
             req.params.id,
@@ -34,12 +34,13 @@ exports.updateBook = async (req, res) => {
                 borrowedAt
             },
             {
-                new: true
+                new: true,
+                runValidators: true
             }
         );
         if (!updateBook) {
             return res.status(404).json({
-                message: 'The book does not exits'
+                message: 'The book does not exist.'
             });
         }
         res.status(200).json(updateBook);
@@ -57,7 +58,7 @@ exports.deleteBook = async (req, res) => {
 
         if (!deletedBook) {
             return res.status(404).json({
-                message: 'The Book does not exits.'
+                message: 'The book does not exist.'
             });
         }
         res.status(200).json(deletedBook);
