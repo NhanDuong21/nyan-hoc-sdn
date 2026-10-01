@@ -119,9 +119,30 @@ exports.deleteReport = async (req, res) => {
 
 exports.renderReportList = async (req, res) => {
     try {
-        const reports = await Report.find().populate('assignedTo', 'name email');
+        const filter = {};
 
-        res.render('pages/reports/list', { reports });
+        if (req.query.project) {
+            filter.project = req.query.project;
+        }
+
+        if (req.query.status) {
+            filter.status = req.query.status;
+        }
+
+        if (req.query.severity) {
+            filter.severity = req.query.severity;
+        }
+
+        const reports = await Report.find(filter).populate('assignedTo', 'name email');
+
+        res.render('pages/reports/list', {
+            reports,
+            filters: {
+                project: req.query.project || '',
+                status: req.query.status || '',
+                severity: req.query.severity || ''
+            }
+        });
     } catch (error) {
         res.status(500).send(error.message);
     }
