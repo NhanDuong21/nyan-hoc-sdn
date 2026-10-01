@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 
 const connectDB = require('./src/config/db');
+const userRoutes = require('./src/routes/userRoutes');
 
 dotenv.config();
 
@@ -18,9 +19,7 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 
 connectDB();
 
-app.get('/', (req, res) => {
-    res.send('Bug Report Management Application');
-}); 
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 8000;
 
