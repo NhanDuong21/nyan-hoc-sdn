@@ -116,3 +116,13 @@ exports.deleteReport = async (req, res) => {
         });
     }
 };
+
+exports.renderReportList = async (req, res) => {
+    try {
+        const reports = await Report.find().populate('assignedTo', 'name email');
+
+        res.render('pages/reports/list', { reports });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
