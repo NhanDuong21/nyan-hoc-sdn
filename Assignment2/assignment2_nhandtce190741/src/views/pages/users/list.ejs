@@ -6,7 +6,7 @@
 %>
 <%- include('../../partials/header') %>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
 
         <h2 class="page-title mb-0">
             Users
@@ -19,7 +19,7 @@
     </div>
 
 
-    <div class="card shadow-sm">
+    <div class="card list-panel">
 
         <div class="card-body">
 
@@ -33,9 +33,9 @@
 
                     <div class="table-responsive">
 
-                        <table class="table table-hover align-middle">
+                        <table class="table table-striped table-hover align-middle mb-0">
 
-                            <thead class="table-light">
+                            <thead>
 
                                 <tr>
                                     <th>Name</th>
@@ -53,9 +53,7 @@
                                     <tr>
 
                                         <td>
-                                            <strong>
-                                                <%= user.name %>
-                                            </strong>
+                                            <%= user.name %>
                                         </td>
 
                                         <td>

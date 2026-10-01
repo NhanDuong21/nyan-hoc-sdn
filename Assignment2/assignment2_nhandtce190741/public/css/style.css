@@ -4,21 +4,86 @@
 */
 
 body {
-    background-color: #f8f9fa;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.app-navbar,
+.app-footer {
+    background-color: #2e8657;
+}
+
+.app-navbar {
+    min-height: 48px;
+}
+
+.app-navbar .navbar-brand {
+    font-size: 18px;
 }
 
 .page-title {
+    font-size: 26px;
     font-weight: 600;
 }
 
+.btn,
+.form-control,
+.form-select {
+    font-size: 14px;
+}
+
+.btn-primary {
+    --bs-btn-bg: #316dff;
+    --bs-btn-border-color: #316dff;
+    --bs-btn-hover-bg: #245ae0;
+    --bs-btn-hover-border-color: #245ae0;
+    --bs-btn-active-bg: #245ae0;
+    --bs-btn-active-border-color: #245ae0;
+}
+
+.list-panel {
+    border: 0;
+    border-radius: 0;
+}
+
+.list-panel > .card-body {
+    padding: 0;
+}
+
+.report-filters .filter-project {
+    width: 180px;
+    max-width: 100%;
+}
+
+.report-filters .filter-select {
+    width: 140px;
+    max-width: 100%;
+}
+
 .table {
-    background-color: white;
+    --bs-table-striped-bg: #f2f2f2;
+    --bs-table-border-color: #e5e7eb;
+    background-color: #fff;
+}
+
+.table th {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table td,
+.table th {
+    padding: 8px;
+}
+
+.table .btn-sm {
+    font-size: 12px;
+    padding: 3px 6px;
 }
 
 .app-footer {
-    background-color: rgb(var(--bs-primary-rgb));
     color: white;
-    padding: 12px 24px;
-    font-size: 14px;
+    padding: 10px 24px;
+    font-size: 12px;
     text-align: center;
 }
