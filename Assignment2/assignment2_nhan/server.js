@@ -2,6 +2,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./src/config/db');
 const usersRoutes = require('./src/routes/userRoutes');
+const tasksRoutes = require('./src/routes/taskRoutes');
+
 dotenv.config();
 
 const app = express();
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', usersRoutes);
+app.use('/api/tasks', tasksRoutes);
 
 const PORT = process.env.PORT || 5000;
 
