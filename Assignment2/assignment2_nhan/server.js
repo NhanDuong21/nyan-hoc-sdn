@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./src/config/db');
-
+const usersRoutes = require('./src/routes/userRoutes');
 dotenv.config();
 
 const app = express();
@@ -16,6 +16,8 @@ connectDB();
 app.get('/', (req, res) => {
     res.send('Assignment 2 is running');
 });
+
+app.use('/api/users', usersRoutes);
 
 const PORT = process.env.PORT || 5000;
 
