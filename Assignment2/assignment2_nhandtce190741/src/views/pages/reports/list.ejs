@@ -1,108 +1,120 @@
-<% /* Assignment 2 - Report list page Member code: nhandtce190741 */ %>
+<%- include('../../partials/header') %>
 
-    <%- include('../../partials/header') %>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="page-title mb-0">
+            Reports
+        </h2>
 
-            <h2 class="page-title mb-0">
-                Reports
-            </h2>
+        <a href="/reports/create" class="btn btn-primary">
+            Create Report
+        </a>
 
-            <a href="#" class="btn btn-primary">
-                Create Report
-            </a>
-
-        </div>
+    </div>
 
 
-        <div class="card shadow-sm">
-            <div class="card-body">
+    <div class="card shadow-sm">
 
-                <% if (reports.length===0) { %>
+        <div class="card-body">
 
-                    <div class="alert alert-info mb-0">
-                        No reports found.
-                    </div>
+            <% if (reports.length===0) { %>
 
-                    <% } else { %>
+                <div class="alert alert-info mb-0">
+                    No reports found.
+                </div>
 
-                        <div class="table-responsive">
+                <% } else { %>
 
-                            <table class="table table-hover align-middle">
+                    <div class="table-responsive">
 
-                                <thead class="table-light">
+                        <table class="table table-hover align-middle">
+
+                            <thead class="table-light">
+
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Project</th>
+                                    <th>Severity</th>
+                                    <th>Status</th>
+                                    <th>Assigned To</th>
+                                    <th>Created At</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <% reports.forEach(report=> { %>
+
                                     <tr>
-                                        <th>Title</th>
-                                        <th>Project</th>
-                                        <th>Severity</th>
-                                        <th>Status</th>
-                                        <th>Assigned To</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
 
-                                <tbody>
+                                        <td>
+                                            <strong>
+                                                <%= report.title %>
+                                            </strong>
+                                        </td>
 
-                                    <% reports.forEach(report=> { %>
+                                        <td>
+                                            <%= report.project || '-' %>
+                                        </td>
 
-                                        <tr>
+                                        <td>
+                                            <%= report.severity %>
+                                        </td>
 
-                                            <td>
-                                                <strong>
-                                                    <%= report.title %>
-                                                </strong>
-                                            </td>
+                                        <td>
+                                            <%= report.status %>
+                                        </td>
 
-                                            <td>
-                                                <%= report.project || '-' %>
-                                            </td>
+                                        <td>
 
-                                            <td>
-                                                <%= report.severity %>
-                                            </td>
+                                            <% if (report.assignedTo) { %>
 
-                                            <td>
-                                                <%= report.status %>
-                                            </td>
+                                                <%= report.assignedTo.name %>
 
-                                            <td>
-                                                <% if (report.assignedTo) { %>
-                                                    <%= report.assignedTo.name %>
-                                                        <% } else { %>
-                                                            Unassigned
-                                                            <% } %>
-                                            </td>
+                                                    <% } else { %>
 
-                                            <td>
-                                                <%= new Date(report.createdAt).toLocaleString() %>
-                                            </td>
+                                                        Unassigned
 
-                                            <td>
+                                                        <% } %>
 
-                                                <a href="#" class="btn btn-sm btn-outline-primary">
-                                                    Edit
-                                                </a>
+                                        </td>
 
-                                                <button class="btn btn-sm btn-outline-danger" disabled>
+                                        <td>
+                                            <%= new Date(report.createdAt).toLocaleString() %>
+                                        </td>
+
+                                        <td>
+
+                                            <a href="/reports/edit/<%= report._id %>"
+                                                class="btn btn-sm btn-outline-primary">
+                                                Edit
+                                            </a>
+
+                                            <form action="/reports/delete/<%= report._id %>" method="POST"
+                                                class="d-inline">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">
                                                     Delete
                                                 </button>
+                                            </form>
 
-                                            </td>
+                                        </td>
 
-                                        </tr>
+                                    </tr>
 
-                                        <% }) %>
+                                    <% }) %>
 
-                                </tbody>
+                            </tbody>
 
-                            </table>
+                        </table>
 
-                        </div>
+                    </div>
 
-                        <% } %>
+                    <% } %>
 
-            </div>
         </div>
 
-        <%- include('../../partials/footer') %>
+    </div>
+
+    <%- include('../../partials/footer') %>

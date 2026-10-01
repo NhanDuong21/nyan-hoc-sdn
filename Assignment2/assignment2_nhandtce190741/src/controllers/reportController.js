@@ -1,5 +1,5 @@
 const Report = require('../models/Report');
-
+const User = require('../models/User');
 exports.getAllReports = async (req, res) => {
     try {
         const filter = {};
@@ -122,6 +122,96 @@ exports.renderReportList = async (req, res) => {
         const reports = await Report.find().populate('assignedTo', 'name email');
 
         res.render('pages/reports/list', { reports });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+exports.renderCreateReportForm = async (req, res) => {
+    try {
+
+        const users = await User.find();
+
+        res.render('pages/reports/create', { users });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+exports.createReportFromForm = async (req, res) => {
+    try {
+        await Report.create({
+            title: req.body.title,
+            description: req.body.description,
+            severity: req.body.severity,
+            status: req.body.status,
+            project: req.body.project,
+            assignedTo: req.body.assignedTo
+        });
+
+        res.redirect('/reports');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+
+exports.renderEditReportForm = async (req, res) => {
+    try {
+
+        const report = await Report.findById(req.params.id);
+        const users = await User.find();
+
+        if (!report) {
+            return res.status(404).send('Report not found');
+        }
+
+        res.render('pages/reports/edit', { report, users });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+exports.updateReportFromForm = async (req, res) => {
+    try {
+        const updatedReport = await Report.findByIdAndUpdate(
+            req.params.id,
+            {
+                title: req.body.title,
+                description: req.body.description,
+                severity: req.body.severity,
+                status: req.body.status,
+                project: req.body.project,
+                assignedTo: req.body.assignedTo
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!updatedReport) {
+            return res.status(404).send('Report not found');
+        }
+
+        res.redirect('/reports');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+
+exports.deleteReportFromForm = async (req, res) => {
+    try {
+        const deletedReport = await Report.findByIdAndDelete(req.params.id);
+
+        if (!deletedReport) {
+            return res.status(404).send('Report not found');
+        }
+
+        res.redirect('/reports');
     } catch (error) {
         res.status(500).send(error.message);
     }
