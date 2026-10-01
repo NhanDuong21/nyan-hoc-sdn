@@ -1,3 +1,6 @@
+// Assignment 2 - User controller
+// Member code: nhandtce190741
+
 const User = require('../models/User');
 
 exports.getAllUsers = async (req, res) => {

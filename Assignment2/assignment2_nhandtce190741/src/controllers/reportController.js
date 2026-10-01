@@ -1,3 +1,6 @@
+// Assignment 2 - Report controller
+// Member code: nhandtce190741
+
 const Report = require('../models/Report');
 const User = require('../models/User');
 exports.getAllReports = async (req, res) => {

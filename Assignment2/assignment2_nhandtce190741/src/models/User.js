@@ -1,3 +1,6 @@
+// Assignment 2 - User model
+// Member code: nhandtce190741
+
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({

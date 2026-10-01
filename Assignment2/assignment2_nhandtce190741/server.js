@@ -1,3 +1,6 @@
+// Assignment 2 - Application server
+// Member code: nhandtce190741
+
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');

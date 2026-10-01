@@ -1,3 +1,6 @@
+// Assignment 2 - MongoDB connection
+// Member code: nhandtce190741
+
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

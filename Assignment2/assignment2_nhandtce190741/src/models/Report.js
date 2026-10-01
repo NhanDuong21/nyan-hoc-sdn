@@ -1,3 +1,6 @@
+// Assignment 2 - Report model
+// Member code: nhandtce190741
+
 const mongoose = require('mongoose');
 
 const reportSchema = new mongoose.Schema(
