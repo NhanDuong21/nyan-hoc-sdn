@@ -94,3 +94,87 @@ exports.deleteUser = async (req, res) => {
         });
     }
 };
+
+exports.renderUserList = async (req, res) => {
+    try {
+        const users = await User.find();
+
+        res.render('pages/users/list', { users });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+exports.renderCreateUserForm = (req, res) => {
+    res.render('pages/users/create');
+};
+
+
+exports.createUserFromForm = async (req, res) => {
+    try {
+        await User.create({
+            name: req.body.name,
+            email: req.body.email
+        });
+
+        res.redirect('/users');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+
+exports.renderEditUserForm = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        res.render('pages/users/edit', { user });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+exports.updateUserFromForm = async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                name: req.body.name,
+                email: req.body.email
+            },
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).send('User not found');
+        }
+
+        res.redirect('/users');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+};
+
+
+exports.deleteUserFromForm = async (req, res) => {
+    try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+        if (!deletedUser) {
+            return res.status(404).send('User not found');
+        }
+
+        res.redirect('/users');
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}; 

@@ -10,6 +10,10 @@ body {
     background-color: white;
 }
 
-footer {
-    background-color: white;
+.app-footer {
+    background-color: rgb(var(--bs-primary-rgb));
+    color: white;
+    padding: 12px 24px;
+    font-size: 14px;
+    text-align: center;
 }
