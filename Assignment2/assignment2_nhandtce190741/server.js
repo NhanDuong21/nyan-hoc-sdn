@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 const connectDB = require('./src/config/db');
 const userRoutes = require('./src/routes/userRoutes');
+const reportRoutes = require('./src/routes/reportRoutes');
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.set('views', path.join(__dirname, 'src', 'views'));
 connectDB();
 
 app.use('/api/users', userRoutes);
+app.use('/api/reports', reportRoutes);
 
 const PORT = process.env.PORT || 8000;
 
