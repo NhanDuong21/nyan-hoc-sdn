@@ -1,4 +1,5 @@
 const Task = require('../models/Task');
+const User = require('../models/User');
 
 exports.getAllTasks = async (req, res) => {
     try {
@@ -10,6 +11,12 @@ exports.getAllTasks = async (req, res) => {
             error: error.message
         });
     }
+};
+
+exports.getTasks = async (req, res) => {
+    const tasks = await Task.find().populate('assignTo', 'name email');
+
+    res.render('listTask', { tasks });
 };
 
 exports.createTasks = async (req, res) => {
@@ -27,6 +34,12 @@ exports.createTasks = async (req, res) => {
             error: error.message
         });
     }
+};
+
+exports.createTaskForm = async (req, res) => {
+    const users = await User.find();
+
+    res.render('createTask', { users });
 };
 
 exports.updateTasks = async (req, res) => {

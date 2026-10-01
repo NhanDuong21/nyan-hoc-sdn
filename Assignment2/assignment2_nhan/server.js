@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./src/config/db');
 const usersRoutes = require('./src/routes/userRoutes');
 const tasksRoutes = require('./src/routes/taskRoutes');
-
+const path = require('path');
 dotenv.config();
 
 const app = express();
@@ -11,6 +11,10 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//set ejs
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src', 'views'));
 
 // Connect database
 connectDB();

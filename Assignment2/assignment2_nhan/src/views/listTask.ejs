@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task List</title>
+</head>
+
+<body>
+
+    <h2>Task List</h2>
+
+    <a href="/api/tasks/create">Create Task</a>
+
+    <ul>
+
+        <% tasks.forEach(task=> { %>
+
+            <li>
+
+                <strong>
+                    <%= task.title %>
+                </strong>
+
+                <br>
+
+                Assigned to:
+                <%= task.assignTo ? task.assignTo.name : 'Unassigned' %>
+
+                    (
+                    <%= task.assignTo ? task.assignTo.email : '' %>
+                        )
+
+                        <br>
+
+                        Status:
+                        <%= task.status %>
+
+                            <br>
+
+                            Completed:
+                            <%= task.completedAt %>
+
+            </li>
+
+            <% }) %>
+
+    </ul>
+
+</body>
+
+</html>
